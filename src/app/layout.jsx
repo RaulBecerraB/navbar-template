@@ -1,5 +1,10 @@
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import { CssVarsProvider } from '@mui/joy/styles';
+import CssBaseline from '@mui/joy/CssBaseline';
+import Box from '@mui/joy/Box';
+import Typography from '@mui/joy/Typography';
+import NavigationMenu from './components/NavigationMenu';
+import "./styles/globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,7 +27,30 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <CssVarsProvider defaultMode="light">
+          <CssBaseline />
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              minHeight: '100vh',
+            }}
+          >
+            <header>
+              <Box sx={{ maxWidth: '1200px', mx: 'auto', width: '100%', px: 2, py: 2 }}>
+                <NavigationMenu />
+              </Box>
+            </header>
+            
+            {children}
+            
+            <Box component="footer" sx={{ py: 3, textAlign: 'center', mt: 'auto' }}>
+              <Typography level="body-sm">
+                © {new Date().getFullYear()} Mi Sitio Web
+              </Typography>
+            </Box>
+          </Box>
+        </CssVarsProvider>
       </body>
     </html>
   );

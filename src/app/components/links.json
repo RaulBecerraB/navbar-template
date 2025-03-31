@@ -1,0 +1,16 @@
+[
+    {
+      "id": "home",
+      "label": "Home",
+      "icon": "HomeRoundedIcon",
+      "path": "/",
+      "submenu": null
+    },
+    {
+      "id": "about",
+      "label": "Sobre Nosotros",
+      "icon": "InfoRoundedIcon",
+      "path": "/about",
+      "submenu": null
+    }
+]
