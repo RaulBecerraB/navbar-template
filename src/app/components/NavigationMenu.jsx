@@ -20,19 +20,10 @@ import SchoolRoundedIcon from '@mui/icons-material/SchoolRounded';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 // Mapa de iconos para convertir nombres de strings a componentes
-const iconMap = {
-  'HomeRoundedIcon': <HomeRoundedIcon />,
-  'InfoRoundedIcon': <InfoRoundedIcon />,
-  'SchoolRoundedIcon': <SchoolRoundedIcon />
-};
-
-// Función para renderizar el icono correcto
-const renderIcon = (iconName) => {
-  // Si no hay icono, retornar null
-  if (!iconName) return null;
-  
-  // Retornar el icono del mapa o null si no existe
-  return iconMap[iconName] || null;
+const iconComponents = {
+  'HomeRoundedIcon': HomeRoundedIcon,
+  'InfoRoundedIcon': InfoRoundedIcon,
+  'SchoolRoundedIcon': SchoolRoundedIcon
 };
 
 // Menu desplegable personalizado
@@ -53,6 +44,13 @@ export default function NavigationMenu() {
   const [hoveredItem, setHoveredItem] = React.useState(null);
   const [focusedItem, setFocusedItem] = React.useState(null);
   const [activeItem, setActiveItem] = React.useState(null);
+
+  // Función para renderizar el icono correcto
+  const renderIcon = React.useCallback((iconName) => {
+    if (!iconName || !iconComponents[iconName]) return null;
+    const IconComponent = iconComponents[iconName];
+    return <IconComponent />;
+  }, []);
 
   // Manejo de teclado para navegación accesible
   const handleKeyDown = (event, itemId) => {
@@ -82,7 +80,8 @@ export default function NavigationMenu() {
           '--List-padding': '4px',
           '--List-gap': '8px',
           bgcolor: 'background.surface',
-          boxShadow: 'sm',
+          boxShadow: 'lg',
+          padding: '15px',
         }}
       >
         {menuItems.map((item) => (
@@ -141,9 +140,9 @@ export default function NavigationMenu() {
                   }}
                 >
                   {item.submenu.map((subItem) => (
-                    <ListItem key={subItem.id}>
+                    <ListItem key={subItem.id} >
                       <ListItemButton component={Link} href={subItem.path}>
-                        <ListItemContent>
+                        <ListItemContent  >
                           {subItem.label}
                           {subItem.highlight && (
                             <Typography

@@ -1,5 +1,3 @@
-'use client';
-
 import Box from '@mui/joy/Box';
 import Typography from '@mui/joy/Typography';
 
